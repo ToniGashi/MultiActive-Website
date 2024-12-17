@@ -55,13 +55,13 @@ export default function HeroHome() {
             className="w-full flex flex-col md:flex-row gap-5"
             data-aos="fade-up"
           >
-            <Image
+            <img
               src={"/mac-gentlemen.png"}
               alt="multi active card gentlemen version"
               width={570}
               height={300}
             />
-            <Image
+            <img
               src={"/mac-ladies.png"}
               alt="multi active card gentlemen version"
               width={570}
