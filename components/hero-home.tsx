@@ -1,5 +1,3 @@
-import VideoThumb from "@/public/images/hero-image-01.jpg";
-import ModalVideo from "@/components/modal-video";
 import Image from "next/image";
 
 export default function HeroHome() {
@@ -55,15 +53,15 @@ export default function HeroHome() {
             className="w-full flex flex-col md:flex-row gap-5"
             data-aos="fade-up"
           >
-            <img
-              src={"/mac-gentlemen.png"}
+            <Image
+              src="/MAC-gentlemen.png"
               alt="multi active card gentlemen version"
               width={570}
               height={300}
             />
-            <img
-              src={"/mac-ladies.png"}
-              alt="multi active card gentlemen version"
+            <Image
+              src="/MAC-ladies.png"
+              alt="multi active card ladies version"
               width={570}
               height={300}
             />

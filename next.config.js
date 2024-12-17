@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["azureblobimg.blob.core.windows.net"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "azureblobimg.blob.core.windows.net",
+        port: "",
+        pathname: "**",
+        search: "",
+      },
+    ],
   },
 };
 
