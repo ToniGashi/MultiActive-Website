@@ -32,7 +32,7 @@ export default function Footer() {
                   About us
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
                   href="/contact"
@@ -40,7 +40,7 @@ export default function Footer() {
                   Contact us
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
                   href="/blogs"
@@ -81,7 +81,7 @@ export default function Footer() {
               <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
-                  href="#0"
+                  href="/terms"
                 >
                   Terms of service
                 </a>
