@@ -24,7 +24,7 @@ const Listings = ({ partners }: { partners: IPartner[] }) => {
             </div>
 
             {/* Button */}
-            <Link href={`/dashboard/partners/${partner.id}`} className="w-full">
+            <Link href={`/partners/${partner.id}`} className="w-full">
               <button className="px-4 py-2 bg-blue-500/80 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
                 View Details
               </button>
