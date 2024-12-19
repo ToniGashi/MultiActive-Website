@@ -1,9 +1,8 @@
 import React from "react";
 import PartnerMap from "@/components/ui/partners/map";
 import Listings from "@/components/ui/partners/listings";
-import { IPartner } from "@/components/ui/partners/types";
 
-export const partners: IPartner[] = [
+const partners = [
   {
     id: "126eed9c-c90c-4ef6-a4a8-fcf7408d",
     name: "Tech Solutions Inc.",

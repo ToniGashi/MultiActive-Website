@@ -1,16 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { IconGenerator, CustomChip } from "@/components/ui/common";
-
-const partners = [
-  "airbnb",
-  "booking",
-  "expedia",
-  "google",
-  "tripadvisor",
-  "vrbo",
-];
 
 export default function AboutUsClientPage() {
   return (
