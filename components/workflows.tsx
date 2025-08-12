@@ -65,9 +65,9 @@ export default function Workflows() {
                       </span>
                     </span>
                   </div>
-                  <p className="text-indigo-200/65">
+                  <p className="text-indigo-200/85">
                     Përfshihen goxha palestra lokale te cilat punëtorët tuaj
-                    mund ti frekuentojnë. Ideal per kompanitë të cilat kanë një
+                    mund ti frekuentojnë. Ideal për kompanitë të cilat kanë një
                     nga partnerët tanë pranë
                   </p>
                 </div>
@@ -113,10 +113,10 @@ export default function Workflows() {
                       </span>
                     </span>
                   </div>
-                  <p className="text-indigo-200/65">
+                  <p className="text-indigo-200/85">
                     Përfshihen të gjithë palestrat partnere dhe zbritje ne
-                    dyqanet partnere. Ideal per kompanitë duan te ofrojnë dicka
-                    me tepër per punonjësit e tyre.
+                    dyqanet partnere. Ideal për kompanitë që duan te ofrojnë
+                    dicka me tepër per punonjësit e tyre.
                   </p>
                 </div>
               </div>
@@ -161,9 +161,9 @@ export default function Workflows() {
                       </span>
                     </span>
                   </div>
-                  <p className="text-indigo-200/65">
+                  <p className="text-indigo-200/85">
                     Përfshihen të gjithë palestrat partnere, zbritje ne dyqanet
-                    partnere, zbritje ne aktivitete te ndrryshme dhe gjithcka qe
+                    partnere, zbritje ne aktivitete te ndrryshme dhe gjithcka që
                     shtohet ne networkun tonë. Thjeshtë ideal.
                   </p>
                 </div>

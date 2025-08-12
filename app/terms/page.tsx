@@ -11,7 +11,7 @@ function Page() {
             Aktivitete Fizike:{" "}
           </span>
           Ne ofrojmë programe të personalizuara për aktivitete fizike që
-          përmirësojnë shëndetin dhe mirëqenien e stafit tuaj.
+          përmirësojnë shëndetin dhe mirëqënien e stafit tuaj.
         </p>
         <p>
           <span className="text-primary font-semibold">

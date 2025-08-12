@@ -21,7 +21,7 @@ function PartnersClient({ partnerData }: { partnerData: IPartner }) {
   return (
     <>
       <ImageGallery images={displayedImages} onImageClick={setSelectedImage} />
-      <div className="text-center mb-16">
+      <div className="text-center my-16">
         <ActionButton onClick={() => setSelectedImage(0)}>
           View All Images
         </ActionButton>
@@ -30,9 +30,9 @@ function PartnersClient({ partnerData }: { partnerData: IPartner }) {
         address={partnerData.address}
         city={partnerData.city}
         country={partnerData.country}
-        openTime={partnerData.open_time}
-        closeTime={partnerData.close_time}
-        dayOffs={partnerData.day_offs}
+        openTime={partnerData.openTime}
+        closeTime={partnerData.closeTime}
+        dayOffs={partnerData.dayOffs}
       />
       {selectedImage !== null && (
         <FullScreenGallery
@@ -347,7 +347,7 @@ function ActionButton({
   return (
     <button
       onClick={onClick}
-      className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark transition-colors"
+      className="bg-[#5e62e6] text-white px-6 py-2 rounded-md hover:bg-primary-dark transition-colors"
     >
       {children}
     </button>

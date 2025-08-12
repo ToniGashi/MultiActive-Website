@@ -44,7 +44,7 @@ export default function Features() {
             </h2>
             <p className="text-lg text-indigo-200/65">
               Kompanitë na zgjedhin neve për platformën inovative dhe
-              promovonimin e mirëqenies së punonjësve. Përkushtimi ynë për të
+              promovonimin e mirëqënies së punonjësve. Përkushtimi ynë për të
               krijuar një kulturë pune të shëndetshme dhe përfitimet ekskluzive
               që ofrojmë, i bëjnë kompanitë kliente më tërheqëse dhe
               konkurruese.
@@ -75,9 +75,9 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-                Mirëqenie më e Mirë në Punë
+                Mirëqënie më e Mirë në Punë
               </h3>
-              <p className="text-indigo-200/65">
+              <p className="text-indigo-200/85">
                 Ndihmon kompanitë të krijojnë forca punëtore më të shëndetshme,
                 më të angazhuara dhe më të lumtura, duke reduktuar stresin dhe
                 djegien profesionale.
@@ -96,7 +96,7 @@ export default function Features() {
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
                 Produktivitet Organizativ i Përmirësuar
               </h3>
-              <p className="text-indigo-200/65">
+              <p className="text-indigo-200/85">
                 Sigurimi që punonjësit janë fizikisht dhe mendërisht të gatshëm
                 për të kontribuar më mirë.
               </p>
@@ -115,9 +115,9 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-                Ndryshim Kulturor drejt Mirëqenies
+                Ndryshim Kulturor drejt Mirëqënies
               </h3>
-              <p className="text-indigo-200/65">
+              <p className="text-indigo-200/85">
                 Nxitja e një mentaliteti ku shëndeti dhe balanca punë-jetë janë
                 thelbësore për suksesin e biznesit.
               </p>
@@ -143,7 +143,7 @@ export default function Features() {
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
                 Rritje Ekonomike përmes Forcave të Punës të Shëndetshme
               </h3>
-              <p className="text-indigo-200/65">
+              <p className="text-indigo-200/85">
                 Punonjësit më të shëndetshëm kontribuojnë më mirë në organizatat
                 e tyre dhe ekonominë kombëtare.
               </p>
@@ -164,7 +164,7 @@ export default function Features() {
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
                 Praktika të Qëndrueshme të Burimeve Njerëzore
               </h3>
-              <p className="text-indigo-200/65">
+              <p className="text-indigo-200/85">
                 Ndihmon organizatat të mbajnë talentet më të mira duke ofruar
                 përfitime domethënëse.
               </p>
@@ -185,7 +185,7 @@ export default function Features() {
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
                 Ndikim në Komunitet
               </h3>
-              <p className="text-indigo-200/65">
+              <p className="text-indigo-200/85">
                 Përtej vendeve të punës, promovimi i fitnesit dhe shëndetit
                 bëhet prioritet shoqëror.
               </p>

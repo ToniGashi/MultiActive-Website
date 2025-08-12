@@ -17,7 +17,7 @@ export default function AboutUsClientPage() {
                   </h1>
                   <h6 className="mx-4 text-base leading-6 sm:mx-20 sm:text-lg sm:leading-8 lg:mx-40 lg:text-xl lg:leading-[30px]">
                     Tek Multi Active ne ofrojmë akses në aktivitete fizike dhe
-                    përfitime shëndetësore, duke nxitur mirëqenien dhe
+                    përfitime shëndetësore, duke nxitur mirëqënien dhe
                     produktivitetin e stafit tuaj.
                   </h6>
                 </div>
@@ -49,7 +49,7 @@ export default function AboutUsClientPage() {
                   <p className="text-center text-base leading-6 text-[#676D73] sm:leading-7 lg:text-left lg:text-lg">
                     Ne jemi një ekip i përkushtuar për të ndihmuar kompanitë të
                     krijojnë mjedise pune më të lumtura dhe produktive. Me një
-                    fokus të veçantë në mirëqenien e punonjësve, ne ofrojmë
+                    fokus të veçantë në mirëqënien e punonjësve, ne ofrojmë
                     zgjidhje inovative që përfshijnë aktivitete fizike,
                     përfitime shëndetësore dhe programe motivuese të përshtatura
                     për nevojat unike të çdo organizate.

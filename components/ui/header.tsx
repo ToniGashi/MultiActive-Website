@@ -17,7 +17,7 @@ export default function Header() {
             href="/partners"
             className="inline-block px-3 py-1 bg-[#030712] text-white font-bold text-lg rounded-md cursor-pointer hover:bg-[#2a2e6c] focus:outline-none focus:ring-2 focus:ring-blue-700"
           >
-            Partners
+            Partnerët
           </Link>
 
           {/* Desktop sign in links */}
