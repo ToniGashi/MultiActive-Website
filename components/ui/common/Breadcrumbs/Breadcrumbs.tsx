@@ -1,7 +1,5 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-
 interface Breadcrumb {
   label: string;
   href: string;
@@ -13,9 +11,6 @@ export default function Breadcrumbs({
 }: {
   breadcrumbs: Breadcrumb[];
 }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
   return (
     <nav aria-label="Breadcrumb" className="mb-1 block">
       <ol className="flex">

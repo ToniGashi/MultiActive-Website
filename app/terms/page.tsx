@@ -1,4 +1,42 @@
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Termat dhe Kushtet",
+  description:
+    "Lexoni termat dhe kushtet e Multi Active Card. Informacion i detajuar rreth shërbimeve tona, të drejtave të pronësisë, aktiviteteve të ndaluara dhe menaxhimit të shërbimeve. Të gjitha rregullat dhe politikat që duhet të dini.",
+  keywords: [
+    "termat dhe kushtet",
+    "kushtet e shërbimit",
+    "rregullat Multi Active Card",
+    "politika",
+    "të drejtat e pronësisë",
+    "përgjegjësitë",
+    "shërbimet",
+    "rregullore",
+    "kushtet e anëtarësimit",
+  ],
+  openGraph: {
+    title: "Termat dhe Kushtet - Multi Active Card",
+    description:
+      "Lexoni termat dhe kushtet e Multi Active Card. Informacion i detajuar rreth shërbimeve dhe rregullave tona.",
+    url: "https://multiactivecard.com/terms",
+    images: [
+      {
+        url: "/images/terms-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Termat dhe Kushtet Multi Active Card",
+      },
+    ],
+  },
+  twitter: {
+    title: "Termat dhe Kushtet - Multi Active Card",
+    description:
+      "Lexoni termat dhe kushtet e Multi Active Card. Informacion i detajuar rreth shërbimeve dhe rregullave tona.",
+    images: ["/images/terms-twitter.jpg"],
+  },
+};
 
 function Page() {
   return (

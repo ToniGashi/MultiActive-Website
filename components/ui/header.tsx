@@ -1,5 +1,4 @@
 "use client";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Logo from "./logo";
 import Link from "next/link";
 
@@ -19,16 +18,6 @@ export default function Header() {
           >
             Partnerët
           </Link>
-
-          {/* Desktop sign in links */}
-          <SignedOut>
-            <div className="inline-block px-3 py-1 bg-[#030712] text-white font-bold text-lg rounded-md cursor-pointer hover:bg-[#2a2e6c] focus:outline-none focus:ring-2 focus:ring-blue-700">
-              <SignInButton />
-            </div>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
         </div>
       </div>
     </header>

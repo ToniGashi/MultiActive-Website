@@ -1,6 +1,6 @@
 "use client";
 
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, MapMouseEvent } from "@vis.gl/react-google-maps";
 import { IPartner } from "./types";
 import { ClusteredPartnerMarkers } from "./partnerMarker";
 import { useCallback } from "react";
@@ -17,7 +17,7 @@ export default function MarkedMap({
   onPartnerSelect,
 }: PartnerMapProps) {
   // Prevent any Google POI clicks
-  const handleMapClick = useCallback((event: any) => {
+  const handleMapClick = useCallback((event: MapMouseEvent) => {
     // Stop propagation to prevent Google Places from opening
     if (event && event.stop) {
       event.stop();

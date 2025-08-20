@@ -81,6 +81,52 @@
 // }
 
 import React from "react";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  // For now, return basic metadata since blog content is not implemented
+  return {
+    title: `Blog - ${id}`,
+    description:
+      "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme. Këshilla ekspertësh dhe udhëzime të dobishme.",
+    keywords: [
+      "blog",
+      "artikull",
+      "fitness",
+      "wellness",
+      "shëndet",
+      "Multi Active Card",
+      "këshilla",
+      "udhëzime",
+    ],
+    openGraph: {
+      title: `Blog - Multi Active Card`,
+      description:
+        "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme.",
+      url: `https://multiactivecard.com/blogs/${id}`,
+      images: [
+        {
+          url: "/images/blog-default-og.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Multi Active Card Blog",
+        },
+      ],
+    },
+    twitter: {
+      title: `Blog - Multi Active Card`,
+      description:
+        "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme.",
+      images: ["/images/blog-default-twitter.jpg"],
+    },
+  };
+}
 
 function Page() {
   return <div>Blog By Id</div>;

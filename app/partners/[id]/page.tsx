@@ -1,5 +1,57 @@
 import PartnersClient from "@/components/ui/partners/partnersClient";
 import { partners } from "../data";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const partner = partners.find((p) => p.id === id);
+
+  if (!partner) {
+    return {
+      title: "Partner i Gjetur",
+      description: "Partneri që kërkoni nuk është gjetur.",
+    };
+  }
+
+  return {
+    title: partner.name,
+    description: `Zbuloni ${partner.name} në ${partner.city}. ${partner.description} Pjesë e rrjetit Multi Active Card për fitness dhe wellness në Shqipëri.`,
+    keywords: [
+      partner.name,
+      partner.city,
+      "fitness",
+      "wellness",
+      "palestër",
+      "spa",
+      "Multi Active Card",
+      "partner",
+      "Shqipëri",
+      "anëtarësim",
+    ],
+    openGraph: {
+      title: `${partner.name} - Multi Active Card Partner`,
+      description: `Zbuloni ${partner.name} në ${partner.city}. ${partner.description}`,
+      url: `https://multiactivecard.com/partners/${partner.id}`,
+      images: [
+        {
+          url: partner.mainImage || "/images/partner-default-og.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${partner.name} - Multi Active Card Partner`,
+        },
+      ],
+    },
+    twitter: {
+      title: `${partner.name} - Multi Active Card Partner`,
+      description: `Zbuloni ${partner.name} në ${partner.city}. ${partner.description}`,
+      images: [partner.mainImage || "/images/partner-default-twitter.jpg"],
+    },
+  };
+}
 
 function PartnerHeader({
   name,

@@ -5,59 +5,6 @@ import { AdvancedMarker, InfoWindow, useMap } from "@vis.gl/react-google-maps";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { IPartner } from "./types";
 
-const PLACEHOLDER_DATA_URI =
-  "data:image/svg+xml;charset=utf-8," +
-  encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='225' viewBox='0 0 400 225'>
-      <defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
-        <stop stop-color='#e5e7eb' offset='0'/><stop stop-color='#d1d5db' offset='1'/>
-      </linearGradient></defs>
-      <rect width='400' height='225' fill='url(#g)'/>
-      <g fill='#9ca3af'><circle cx='60' cy='60' r='30'/><rect x='140' y='80' width='160' height='80' rx='8'/></g>
-    </svg>`
-  );
-
-function normalizeImageUrl(raw?: string | null): string | null {
-  if (!raw) return null;
-  let url = raw.trim();
-  if (!url) return null;
-
-  // Fix protocol-relative URLs: //cdn.example.com/...
-  if (url.startsWith("//")) url = "https:" + url;
-
-  // Encode spaces
-  url = url.replace(/\s/g, "%20");
-
-  // Resolve relative paths
-  if (url.startsWith("/")) {
-    try {
-      url = new URL(
-        url,
-        typeof window !== "undefined"
-          ? window.location.origin
-          : "https://localhost"
-      ).toString();
-    } catch {
-      return null;
-    }
-  }
-
-  // If page is HTTPS and image is HTTP, most browsers block it (mixed content).
-  if (
-    typeof window !== "undefined" &&
-    window.location.protocol === "https:" &&
-    url.startsWith("http://")
-  ) {
-    console.warn(
-      "[PartnerMarkers] Mixed content: refusing http image on https page.",
-      { original: raw }
-    );
-    return null; // will show placeholder unless you proxy it
-  }
-
-  return url;
-}
-
 // Simple multilevel clustering
 function clusterMarkers(partners: IPartner[], zoom: number) {
   const getClusterDistance = (z: number) =>
@@ -153,21 +100,28 @@ export const ClusteredPartnerMarkers = ({
 
   const map = useMap();
 
-  const setSelectedPartnerKey = (partnerId: string | null) => {
-    if (selectedPartnerId && partnerId && selectedPartnerId !== partnerId) {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        onPartnerSelect
-          ? onPartnerSelect(partnerId)
-          : setInternalSelectedPartnerKey(partnerId);
-        setIsTransitioning(false);
-      }, 150);
-    } else {
-      onPartnerSelect
-        ? onPartnerSelect(partnerId)
-        : setInternalSelectedPartnerKey(partnerId);
-    }
-  };
+  const setSelectedPartnerKey = useCallback(
+    (partnerId: string | null) => {
+      if (selectedPartnerId && partnerId && selectedPartnerId !== partnerId) {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          if (onPartnerSelect) {
+            onPartnerSelect(partnerId);
+          } else {
+            setInternalSelectedPartnerKey(partnerId);
+          }
+          setIsTransitioning(false);
+        }, 150);
+      } else {
+        if (onPartnerSelect) {
+          onPartnerSelect(partnerId);
+        } else {
+          setInternalSelectedPartnerKey(partnerId);
+        }
+      }
+    },
+    [selectedPartnerId, onPartnerSelect, setInternalSelectedPartnerKey]
+  );
 
   useEffect(() => {
     if (!map) return;
@@ -214,7 +168,13 @@ export const ClusteredPartnerMarkers = ({
     } else if (currentZoom < 17) {
       setTimeout(() => map.setZoom(17), 400);
     }
-  }, [map, selectedPartnerId, externalSelectedPartnerId, partners]);
+  }, [
+    map,
+    selectedPartnerId,
+    externalSelectedPartnerId,
+    partners,
+    setSelectedPartnerKey,
+  ]);
 
   useEffect(() => {
     if (!selectedPartnerId) return;
@@ -232,7 +192,7 @@ export const ClusteredPartnerMarkers = ({
       clearTimeout(id);
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [selectedPartnerId]);
+  }, [selectedPartnerId, setSelectedPartnerKey]);
 
   const clusters = useMemo(
     () => clusterMarkers(partners, zoom),
@@ -241,15 +201,15 @@ export const ClusteredPartnerMarkers = ({
 
   const handleInfoWindowClose = useCallback(
     () => setSelectedPartnerKey(null),
-    []
+    [setSelectedPartnerKey]
   );
   const handleMarkerClick = useCallback(
     (id: string) => setSelectedPartnerKey(id),
-    []
+    [setSelectedPartnerKey]
   );
 
   const handleClusterClick = useCallback(
-    (cluster: any) => {
+    (cluster: { type: string; position: google.maps.LatLngLiteral }) => {
       if (!map || cluster.type !== "cluster") return;
       const currentZoom = map.getZoom() || 10;
       let targetZoom = currentZoom + 2;
@@ -263,19 +223,9 @@ export const ClusteredPartnerMarkers = ({
     },
     [map]
   );
-  function normalizeImageUrl(raw?: string | null): string | null {
-    if (!raw) return null;
-    const clean = raw.split("?")[0];
-    const i = clean.indexOf("/fitness/");
-    if (i !== -1) return clean.slice(i); // → "/fitness/whatever.jpg"
 
-    // fallback: last filename under /fitness
-    const segs = clean.split("/").filter(Boolean);
-    const last = segs.pop();
-    return last ? `/fitness/${last}` : null;
-  }
   const imgSrc = useMemo(
-    () => normalizeImageUrl(selectedPartner?.mainImage) ?? "/placeholder.png",
+    () => selectedPartner?.mainImage ?? "/placeholder.png",
     [selectedPartner?.mainImage]
   );
 

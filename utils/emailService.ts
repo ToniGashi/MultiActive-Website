@@ -83,7 +83,6 @@ export class EmailService {
         subject: template.subject,
         html: template.html,
         text: template.text,
-        replyTo: data.email, // Allow recipients to reply directly to the sender
       });
 
       if (error) {
@@ -135,7 +134,6 @@ export class EmailService {
         subject: template.subject,
         html: template.html,
         text: template.text,
-        replyTo: data.email, // Allow recipients to reply directly to the sender
       });
 
       if (error) {
