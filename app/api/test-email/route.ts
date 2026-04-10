@@ -16,15 +16,16 @@ export async function GET() {
       success: true,
       config,
       connectionTest: isConnected,
-      message: "Email service test completed",
+      message: "Testi i shërbimit të emailit përfundoi.",
     });
   } catch (error) {
     console.error("❌ Email service test error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Unknown error",
-        message: "Email service test failed",
+        error: "Testi i shërbimit të emailit dështoi.",
+        message:
+          "Ju lutemi kontrolloni konfigurimin e emailit dhe provoni përsëri.",
       },
       { status: 500 }
     );

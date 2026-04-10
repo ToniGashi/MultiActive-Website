@@ -70,6 +70,21 @@ function clusterMarkers(partners: IPartner[], zoom: number) {
   return clusters;
 }
 
+/** Shift map center slightly north of the partner so the InfoWindow (above the pin) and close button stay in view. */
+function centerMapForInfoWindow(
+  map: google.maps.Map,
+  partner: { latitude: number; longitude: number }
+) {
+  const el = map.getDiv();
+  const h = el?.offsetHeight ?? 400;
+  const scale = Math.min(1.45, Math.max(0.88, 380 / h));
+  const latOffset = 0.00052 * scale;
+  map.panTo({
+    lat: partner.latitude + latOffset,
+    lng: partner.longitude,
+  });
+}
+
 export const ClusteredPartnerMarkers = ({
   partners,
   selectedPartnerId: externalSelectedPartnerId,
@@ -140,34 +155,50 @@ export const ClusteredPartnerMarkers = ({
     const partner = partners.find((p) => p.id === selectedPartnerId);
     if (!partner) return;
 
+    const timeouts: number[] = [];
+    const schedule = (fn: () => void, ms: number) => {
+      timeouts.push(window.setTimeout(fn, ms));
+    };
+
     const currentZoom = map.getZoom() || 10;
-    const target = { lat: partner.latitude, lng: partner.longitude };
 
     if (currentZoom >= 16) {
       const center = map.getCenter();
       if (center) {
         const dist = Math.hypot(
-          center.lat() - target.lat,
-          center.lng() - target.lng
+          center.lat() - partner.latitude,
+          center.lng() - partner.longitude
         );
-        setTimeout(() => map.panTo(target), dist < 0.01 ? 200 : 100);
+        schedule(
+          () => centerMapForInfoWindow(map, partner),
+          dist < 0.01 ? 200 : 100
+        );
       } else {
-        map.panTo(target);
+        centerMapForInfoWindow(map, partner);
       }
     } else {
-      map.panTo(target);
+      centerMapForInfoWindow(map, partner);
     }
 
     if (currentZoom < 14) {
-      setTimeout(() => map.setZoom(Math.min(currentZoom + 3, 15)), 400);
-      setTimeout(() => map.setZoom(16), 800);
-      setTimeout(() => map.setZoom(17), 1200);
+      schedule(() => map.setZoom(Math.min(currentZoom + 3, 15)), 400);
+      schedule(() => map.setZoom(16), 800);
+      schedule(() => map.setZoom(17), 1200);
     } else if (currentZoom < 16) {
-      setTimeout(() => map.setZoom(16), 400);
-      setTimeout(() => map.setZoom(17), 800);
+      schedule(() => map.setZoom(16), 400);
+      schedule(() => map.setZoom(17), 800);
     } else if (currentZoom < 17) {
-      setTimeout(() => map.setZoom(17), 400);
+      schedule(() => map.setZoom(17), 400);
     }
+
+    // After zoom animations, re-center so the close control is not clipped at the top edge
+    schedule(() => {
+      centerMapForInfoWindow(map, partner);
+    }, 1380);
+
+    return () => {
+      timeouts.forEach((id) => window.clearTimeout(id));
+    };
   }, [
     map,
     selectedPartnerId,
@@ -242,18 +273,18 @@ export const ClusteredPartnerMarkers = ({
         >
           {cluster.type === "cluster" ? (
             <div className="relative">
-              <div className="w-12 h-12 bg-blue-600 rounded-full border-3 border-white shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200">
-                <span className="text-white font-bold text-lg">
+              <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 border-white/15 bg-zinc-900 shadow-[0_0_24px_-6px_rgba(59,130,246,0.45)] ring-2 ring-primary/35 transition-transform duration-200 hover:scale-110">
+                <span className="text-lg font-bold text-white">
                   {cluster.partners.length}
                 </span>
               </div>
-              <div className="absolute inset-0 w-12 h-12 bg-blue-600 rounded-full animate-ping opacity-20" />
+              <div className="absolute inset-0 h-12 w-12 animate-ping rounded-full bg-primary/25 opacity-30" />
             </div>
           ) : (
             <div className="relative">
-              <div className="w-8 h-8 bg-blue-600 rounded-full border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-200 cursor-pointer">
+              <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-white/15 bg-zinc-900 shadow-[0_0_16px_-4px_rgba(59,130,246,0.4)] ring-2 ring-primary/30 transition-transform duration-200 hover:scale-110">
                 <svg
-                  className="w-4 h-4 text-white"
+                  className="h-4 w-4 text-sky-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -266,7 +297,7 @@ export const ClusteredPartnerMarkers = ({
                   />
                 </svg>
               </div>
-              <div className="absolute inset-0 w-8 h-8 bg-blue-600 rounded-full animate-ping opacity-20" />
+              <div className="absolute inset-0 h-8 w-8 animate-ping rounded-full bg-primary/25 opacity-30" />
             </div>
           )}
         </AdvancedMarker>
@@ -279,15 +310,18 @@ export const ClusteredPartnerMarkers = ({
             lng: selectedPartner.longitude,
           }}
           onCloseClick={handleInfoWindowClose}
-          pixelOffset={[0, -30]}
+          /* Slightly less upward shift so the header + close control fit in the map frame */
+          pixelOffset={[0, -12]}
+          shouldFocus={false}
+          disableAutoPan
         >
-          <div className="w-48 sm:w-56 md:w-64 max-w-[80vw] bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-md sm:rounded-lg overflow-hidden shadow-lg box-border">
-            {/* Header */}
-            <div className="p-2 sm:p-2.5 md:p-3">
-              <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 mb-1 sm:mb-1.5 md:mb-2">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-white/20 rounded-md sm:rounded-lg flex items-center justify-center flex-shrink-0">
+          <div className="box-border w-48 max-w-[80vw] overflow-hidden rounded-md border border-white/10 bg-zinc-950 bg-gradient-to-b from-zinc-900 to-zinc-950 text-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.75)] sm:w-56 sm:rounded-lg md:w-64">
+            {/* Header — solid layers (no /opacity) so the map never shows through */}
+            <div className="border-b border-white/10 bg-zinc-900 p-2 sm:p-2.5 md:p-3">
+              <div className="mb-1 flex items-center gap-1 sm:mb-1.5 sm:gap-1.5 md:mb-2 md:gap-2">
+                <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md bg-primary/15 sm:h-6 sm:w-6 md:h-8 md:w-8 md:rounded-lg">
                   <svg
-                    className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-white"
+                    className="h-2.5 w-2.5 text-sky-300 sm:h-3 sm:w-3 md:h-4 md:w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -300,17 +334,17 @@ export const ClusteredPartnerMarkers = ({
                     />
                   </svg>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-xs sm:text-sm md:text-base text-white truncate">
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate text-xs font-bold text-white sm:text-sm md:text-base">
                     {selectedPartner?.name}
                   </h3>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-0.5 sm:gap-1 text-white/80 text-xs">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex min-w-0 items-center gap-0.5 text-xs text-zinc-400 sm:gap-1">
                   <svg
-                    className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 flex-shrink-0"
+                    className="h-2 w-2 flex-shrink-0 sm:h-2.5 sm:w-2.5 md:h-3 md:w-3"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -333,18 +367,18 @@ export const ClusteredPartnerMarkers = ({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-0.5 sm:gap-1 bg-green-400/20 text-green-100 px-1 sm:px-1.5 md:px-2 py-0.5 rounded-full text-xs">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-green-300 rounded-full animate-pulse" />
-                  <span className="text-xs">Open</span>
+                <div className="flex flex-shrink-0 items-center gap-0.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-1.5 py-0.5 text-[0.65rem] font-medium text-emerald-300 sm:px-2 sm:text-xs">
+                  <div className="h-1 w-1 animate-pulse rounded-full bg-emerald-400 sm:h-1.5 sm:w-1.5" />
+                  <span>Open</span>
                 </div>
               </div>
             </div>
 
             {/* Image with solid ratio box (16:9) */}
-            <div className="px-2 sm:px-2.5 md:px-3 pb-1.5 sm:pb-2 md:pb-3">
-              <div className="relative w-full overflow-hidden rounded sm:rounded-md bg-gray-100">
+            <div className="bg-zinc-950 px-2 pb-2 pt-0 sm:px-2.5 sm:pb-2.5 md:px-3 md:pb-3">
+              <div className="relative w-full overflow-hidden rounded-md border border-white/10 bg-zinc-900">
                 {/* 16:9 ratio box */}
-                <div className="w-full h-0 pb-[56.25%]" />
+                <div className="h-0 w-full pb-[56.25%]" />
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-300"
                   style={{
@@ -355,13 +389,13 @@ export const ClusteredPartnerMarkers = ({
             </div>
 
             {/* Content */}
-            <div className="bg-white text-gray-800 p-1.5 sm:p-2 md:p-3 overflow-hidden">
-              <p className="text-xs text-gray-600 mb-1.5 leading-tight line-clamp-2 break-words">
+            <div className="overflow-hidden border-t border-white/10 bg-zinc-950 p-1.5 sm:p-2 md:p-3">
+              <p className="mb-1.5 line-clamp-2 break-words text-xs leading-relaxed text-zinc-300">
                 {selectedPartner?.description}
               </p>
               <a
                 href={`/partners/${selectedPartner?.id}`}
-                className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-1.5 px-1.5 rounded hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-medium text-xs whitespace-nowrap"
+                className="block w-full whitespace-nowrap rounded-md border border-primary/30 bg-primary py-1.5 text-center text-xs font-semibold text-primary-foreground shadow-[0_0_24px_-8px_rgba(59,130,246,0.55)] transition-colors hover:bg-primary/90"
               >
                 Shiko më shumë
               </a>

@@ -3,15 +3,6 @@
 import { useState } from "react";
 import useMasonry from "@/utils/useMasonry";
 import Image, { StaticImageData } from "next/image";
-import TestimonialImg01 from "@/public/images/testimonial-01.jpg";
-import TestimonialImg02 from "@/public/images/testimonial-02.jpg";
-import TestimonialImg03 from "@/public/images/testimonial-03.jpg";
-import TestimonialImg04 from "@/public/images/testimonial-04.jpg";
-import TestimonialImg05 from "@/public/images/testimonial-05.jpg";
-import TestimonialImg06 from "@/public/images/testimonial-06.jpg";
-import TestimonialImg07 from "@/public/images/testimonial-07.jpg";
-import TestimonialImg08 from "@/public/images/testimonial-08.jpg";
-import TestimonialImg09 from "@/public/images/testimonial-09.jpg";
 import ClientImg01 from "@/public/images/client-logo-01.svg";
 import ClientImg02 from "@/public/images/client-logo-02.svg";
 import ClientImg03 from "@/public/images/client-logo-03.svg";
@@ -24,7 +15,7 @@ import ClientImg09 from "@/public/images/client-logo-09.svg";
 
 const testimonials = [
   {
-    img: TestimonialImg01,
+    img: "/brand/hero-competition.png",
     clientImg: ClientImg01,
     name: "MaKayla P.",
     company: "Disney",
@@ -33,7 +24,7 @@ const testimonials = [
     categories: [1, 3, 5],
   },
   {
-    img: TestimonialImg02,
+    img: "/brand/hero-box-jump.png",
     clientImg: ClientImg02,
     name: "Andrew K.",
     company: "Samsung",
@@ -42,7 +33,7 @@ const testimonials = [
     categories: [1, 2, 4],
   },
   {
-    img: TestimonialImg03,
+    img: "/brand/training-bw-dip.png",
     clientImg: ClientImg03,
     name: "Lucy D.",
     company: "Rio",
@@ -51,7 +42,7 @@ const testimonials = [
     categories: [1, 2, 5],
   },
   {
-    img: TestimonialImg04,
+    img: "/brand/training-rings.png",
     clientImg: ClientImg04,
     name: "Pavel M.",
     company: "Canon",
@@ -60,7 +51,7 @@ const testimonials = [
     categories: [1, 4],
   },
   {
-    img: TestimonialImg05,
+    img: "/brand/training-deadlift.png",
     clientImg: ClientImg05,
     name: "Miriam E.",
     company: "Cadbury",
@@ -69,7 +60,7 @@ const testimonials = [
     categories: [1, 3, 5],
   },
   {
-    img: TestimonialImg06,
+    img: "/brand/training-rings-wall.png",
     clientImg: ClientImg06,
     name: "Eloise V.",
     company: "Maffell",
@@ -78,7 +69,7 @@ const testimonials = [
     categories: [1, 3],
   },
   {
-    img: TestimonialImg07,
+    img: "/brand/training-rope-climb.png",
     clientImg: ClientImg07,
     name: "Pierre-Gilles L.",
     company: "Binance",
@@ -87,7 +78,7 @@ const testimonials = [
     categories: [1, 2, 5],
   },
   {
-    img: TestimonialImg08,
+    img: "/brand/hero-competition.png",
     clientImg: ClientImg08,
     name: "Danielle K.",
     company: "Forbes Inc.",
@@ -96,7 +87,7 @@ const testimonials = [
     categories: [1, 4],
   },
   {
-    img: TestimonialImg09,
+    img: "/brand/hero-box-jump.png",
     clientImg: ClientImg09,
     name: "Mary P.",
     company: "Ray Ban",
@@ -266,7 +257,7 @@ export function Testimonial({
   children,
 }: {
   testimonial: {
-    img: StaticImageData;
+    img: string;
     clientImg: StaticImageData;
     name: string;
     company: string;

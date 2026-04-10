@@ -1,6 +1,10 @@
 import PartnersClient from "@/components/ui/partners/partnersClient";
 import { partners } from "../data";
 import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, Sparkles } from "lucide-react";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -12,7 +16,7 @@ export async function generateMetadata({
 
   if (!partner) {
     return {
-      title: "Partner i Gjetur",
+      title: "Partner i panjohur",
       description: "Partneri që kërkoni nuk është gjetur.",
     };
   }
@@ -38,7 +42,7 @@ export async function generateMetadata({
       url: `https://multiactivecard.com/partners/${partner.id}`,
       images: [
         {
-          url: partner.mainImage || "/images/partner-default-og.jpg",
+          url: partner.mainImage || "/images/social-share.png",
           width: 1200,
           height: 630,
           alt: `${partner.name} - Multi Active Card Partner`,
@@ -48,47 +52,9 @@ export async function generateMetadata({
     twitter: {
       title: `${partner.name} - Multi Active Card Partner`,
       description: `Zbuloni ${partner.name} në ${partner.city}. ${partner.description}`,
-      images: [partner.mainImage || "/images/partner-default-twitter.jpg"],
+      images: [partner.mainImage || "/images/social-share.png"],
     },
   };
-}
-
-function PartnerHeader({
-  name,
-  description,
-}: {
-  name: string;
-  description: string;
-}) {
-  return (
-    <header className="text-center mb-6 md:mb-12 bg-gradient-to-r from-[#6366f1] to-[#3d4295] rounded-lg md:rounded-xl p-4 md:p-8 animate-fade-in-up">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
-          <div className="w-8 h-8 md:w-12 md:h-12 bg-blue-600 rounded-full flex items-center justify-center animate-pulse-glow">
-            <svg
-              className="w-4 h-4 md:w-6 md:h-6 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-              />
-            </svg>
-          </div>
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold gradient-text text-gray-900">
-            {name}
-          </h1>
-        </div>
-        <p className="text-sm md:text-lg lg:text-xl text-gray-900 max-w-3xl mx-auto leading-relaxed px-2">
-          {description}
-        </p>
-      </div>
-    </header>
-  );
 }
 
 export default async function PartnerPage({
@@ -97,15 +63,64 @@ export default async function PartnerPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const partnerData = partners.find((partner) => partner.id === id)!;
+  const partnerData = partners.find((partner) => partner.id === id);
+
+  if (!partnerData) {
+    notFound();
+  }
+
+  const heroImage = partnerData.mainImage || partnerData.images[0];
 
   return (
-    <div className="container mx-auto px-3 md:px-4 py-4 md:py-6 max-w-7xl animate-fade-in-up">
-      <PartnerHeader
-        name={partnerData?.name ?? ""}
-        description={partnerData?.description ?? ""}
-      />
-      <PartnersClient partnerData={partnerData ?? []} />
+    <div className="relative min-h-screen overflow-hidden text-zinc-100">
+      <Link
+        href="/partners"
+        className="group relative z-30 mx-4 mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-300 backdrop-blur-md transition-all hover:border-primary/40 hover:bg-white/10 hover:text-white md:mx-8 md:mt-8"
+      >
+        <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+        Partnerët
+      </Link>
+
+      <section className="relative z-10 mt-4 px-4 pb-8 md:mt-6 md:px-8">
+        <div className="relative mx-auto max-h-[min(78vh,820px)] min-h-[420px] w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_25px_80px_-20px_rgba(0,0,0,0.8),0_0_120px_-30px_rgba(59,130,246,0.35)] md:min-h-[520px]">
+          <Image
+            src={heroImage}
+            alt={partnerData.name}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 1152px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050506] via-[#050506]/50 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-transparent mix-blend-soft-light" />
+          <div className="absolute inset-0 bg-[linear-gradient(105deg,transparent_40%,rgba(59,130,246,0.12)_100%)]" />
+
+          <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 lg:p-12">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-200 backdrop-blur-sm">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              Partner i rrjetit
+            </div>
+            <h1 className="max-w-4xl text-4xl font-black leading-[0.95] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl">
+              {partnerData.name}
+            </h1>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg">
+              {partnerData.description}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="rounded-lg border border-white/10 bg-black/30 px-3 py-1.5 text-sm text-zinc-200 backdrop-blur-md">
+                {partnerData.city}
+              </span>
+              <span className="rounded-lg border border-white/10 bg-black/30 px-3 py-1.5 text-sm text-zinc-200 backdrop-blur-md">
+                {partnerData.country}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-28 md:px-8 md:pb-36">
+        <PartnersClient partnerData={partnerData} />
+      </div>
     </div>
   );
 }

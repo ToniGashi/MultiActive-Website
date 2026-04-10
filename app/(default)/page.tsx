@@ -1,3 +1,31 @@
+import dynamic from "next/dynamic";
+import BannerDemo from "@/components/ui/banner-demo";
+import Hero from "@/components/hero-home";
+
+const PricingSectionDemo = dynamic(
+  () => import("@/components/ui/pricing-demo"),
+  {
+    loading: () => (
+      <div
+        className="min-h-[48rem] w-full animate-pulse bg-muted/10 py-20 sm:min-h-[52rem] sm:py-24"
+        aria-hidden
+      />
+    ),
+  },
+);
+
+const GridFeatureCardsDemo = dynamic(
+  () => import("@/components/ui/grid-feature-cards-demo"),
+  {
+    loading: () => (
+      <div
+        className="min-h-[36rem] w-full animate-pulse bg-muted/10 py-16 md:min-h-[40rem]"
+        aria-hidden
+      />
+    ),
+  },
+);
+
 export const metadata = {
   title: "Kryefaqja",
   description:
@@ -23,7 +51,7 @@ export const metadata = {
     url: "https://multiactivecard.com",
     images: [
       {
-        url: "/images/homepage-og.jpg",
+        url: "/images/social-share.png",
         width: 1200,
         height: 630,
         alt: "Multi Active Card Kryefaqja",
@@ -34,26 +62,17 @@ export const metadata = {
     title: "Multi Active Card - Rrjeti Premium i Fitness dhe Wellness",
     description:
       "Bashkohuni me rrjetin kryesor të fitnessit dhe mirëqenies në Shqipëri. Qasje në palestrat, spa dhe qendrat e mirëqenies më të mira me një kartë anëtarësimi.",
-    images: ["/images/homepage-twitter.jpg"],
+    images: ["/images/social-share.png"],
   },
 };
-
-import PageIllustration from "@/components/page-illustration";
-import Hero from "@/components/hero-home";
-import Workflows from "@/components/workflows";
-import Features from "@/components/features";
-
-import Cta from "@/components/cta";
 
 export default function Home() {
   return (
     <>
-      <PageIllustration />
+      <BannerDemo />
       <Hero />
-      <Workflows />
-      <Features />
-      {/* <Testimonials /> */}
-      <Cta />
+      <PricingSectionDemo />
+      <GridFeatureCardsDemo />
     </>
   );
 }

@@ -31,8 +31,8 @@ export default function AboutUsClientPage() {
               <div className="flex flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:gap-12">
                 <div className="shrink-0 lg:flex lg:h-[420px]">
                   <Image
-                    alt="Coolvacay about us, second image"
-                    src="/about_us_2.jpg"
+                    alt="Ekipi dhe ambienti Multi Active Card"
+                    src="/brand/training-rings.png"
                     className="rounded-2xl"
                     quality={80}
                     width={452}
@@ -46,7 +46,7 @@ export default function AboutUsClientPage() {
                   <h2 className="text-center text-2xl font-semibold leading-[36px] sm:text-4xl sm:leading-[50px] lg:text-left lg:text-5xl">
                     Kush Jemi Ne
                   </h2>
-                  <p className="text-center text-base leading-6 text-[#676D73] sm:leading-7 lg:text-left lg:text-lg">
+                  <p className="text-center text-base leading-6 text-muted-foreground sm:leading-7 lg:text-left lg:text-lg">
                     Ne jemi një ekip i përkushtuar për të ndihmuar kompanitë të
                     krijojnë mjedise pune më të lumtura dhe produktive. Me një
                     fokus të veçantë në mirëqënien e punonjësve, ne ofrojmë
@@ -71,13 +71,13 @@ export default function AboutUsClientPage() {
 
           {/* Why Clients Trust Us Section */}
           <div className="relative mt-16 sm:mt-[128px] w-full">
-            <div className="flex justify-center bg-[#FAFAFA] rounded-3xl px-4 py-16 sm:px-8 lg:px-16">
+            <div className="flex justify-center rounded-3xl border border-white/10 bg-card/50 px-4 py-16 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm sm:px-8 lg:px-16">
               <div className="custom-max-widths flex flex-col items-center justify-center gap-12 xl:flex-row xl:gap-24">
                 <div className="flex flex-col gap-8 xl:w-1/2">
-                  <h1 className="text-center text-2xl text-[#030712] font-bold leading-8 sm:text-4xl sm:leading-10 lg:text-left">
+                  <h1 className="text-center text-2xl font-bold leading-8 text-foreground sm:text-4xl sm:leading-10 lg:text-left">
                     Pse Na Besojnë Klientët
                   </h1>
-                  <p className="text-center text-base leading-6 text-[#676D73] sm:leading-7 lg:text-left lg:text-lg">
+                  <p className="text-center text-base leading-6 text-muted-foreground sm:leading-7 lg:text-left lg:text-lg">
                     Klientët tanë na zgjedhin sepse ne nuk ofrojmë vetëm
                     zgjidhje, por krijojmë partneritete të qëndrueshme.
                     Platforma jonë moderne, qasja e personalizuar dhe
@@ -97,8 +97,8 @@ export default function AboutUsClientPage() {
                 </div>
                 <div className="flex h-[320px] w-full shrink-0 sm:h-[537px] md:w-[542px]">
                   <Image
-                    alt="Coolvacay about us, third image"
-                    src="/about_us_3.jpg"
+                    alt="Aktivitet dhe mirëqenie me Multi Active Card"
+                    src="/brand/training-rings-wall.png"
                     className="rounded-2xl"
                     width={542}
                     height={537}

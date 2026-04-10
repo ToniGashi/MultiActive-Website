@@ -18,10 +18,10 @@ const Listings = ({
         {partners.map((partner: IPartner, index: number) => (
           <div
             key={partner.name}
-            className={`group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border overflow-hidden partner-card-hover animate-fade-in-up cursor-pointer ${
+            className={`group relative cursor-pointer overflow-hidden rounded-xl border bg-card/50 shadow-sm transition-all duration-300 partner-card-hover animate-fade-in-up hover:shadow-[0_0_32px_-10px_rgba(59,130,246,0.35)] ${
               selectedPartnerId === partner.id
-                ? "border-blue-500 ring-2 ring-blue-200 shadow-lg"
-                : "border-gray-100"
+                ? "border-primary ring-2 ring-primary/40 shadow-lg shadow-primary/20"
+                : "border-white/10"
             }`}
             style={{ animationDelay: `${index * 0.1}s` }}
             onClick={() => onPartnerSelect(partner.id)}
@@ -41,7 +41,7 @@ const Listings = ({
             <div className="relative z-10 p-3 md:p-4 flex flex-col justify-between h-32 md:h-40">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-base md:text-lg text-white mb-1 group-hover:text-blue-200 transition-colors truncate">
+                  <h3 className="mb-1 truncate text-base font-bold text-white transition-colors group-hover:text-white md:text-lg">
                     {partner.name}
                   </h3>
                   <div className="flex items-center gap-1 md:gap-2 text-white/90 text-xs md:text-sm">
@@ -99,7 +99,10 @@ const Listings = ({
                 className="w-full mt-2 md:mt-3"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button className="w-full glass-effect text-white font-semibold py-1.5 md:py-2 px-3 md:px-4 rounded-lg hover:bg-white/30 transition-all duration-300 flex items-center justify-center gap-1 md:gap-2 group-hover:bg-blue-600 group-hover:text-white text-sm md:text-base">
+                <button
+                  type="button"
+                  className="glass-effect flex w-full items-center justify-center gap-1 rounded-lg px-3 py-1.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/30 group-hover:bg-primary group-hover:text-primary-foreground md:gap-2 md:px-4 md:py-2 md:text-base"
+                >
                   <span className="hidden sm:inline">Shiko më shumë</span>
                   <span className="sm:hidden">Details</span>
                   <svg

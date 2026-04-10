@@ -1,87 +1,35 @@
-// import Image from "next/image";
-// import parse from "html-react-parser";
-
-// import { SearchCard } from "../../../ui/components/home/SearchCard";
-// import NewsletterForm from "~/app/ui/components/common/Newsletter/NewsletterForm";
-// import { getBlogById, getBlogContent, getLocationsList } from "../../actions";
-// import { redirect } from "next/navigation";
-// import { Suspense } from "react";
-// import { BlogContentSkeleton, BlogSidebarSkeleton } from "~/app/ui/components/common";
-// import { type Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: 'Blog by ID page',
-//   description: 'Read our Blogs here',
-// };
-
-// const BlogSidebar = async ({id}: {id: string}) => {
-//   const locationsList = (await getLocationsList())!;
-//   const currBlog = await getBlogById(id);
-
-//   return (
-//     <div className="-m-3 flex-col gap-5 md:mt-24 sticky top-24 h-fit">
-//       <div className="flex h-min flex-col items-center justify-center gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
-//         <h5 className="text-2xl font-medium">Find your perfect place</h5>
-//         <SearchCard size="small" locationsList={locationsList} defaultLocation={currBlog?.relatedLocation} />
-//       </div>
-//       <div className="mt-5 flex h-min flex-col gap-5 rounded-[10px] bg-[#F7F7F7] p-6">
-//         <NewsletterForm isTextBlack={true} />
-//         <div className="flex h-[190px] w-full shrink-0 lg:hidden">
-//           <Image
-//             alt="Blog image"
-//             src="/newsletter_img.jpeg"
-//             className="rounded-sm"
-//             width={460}
-//             height={190}
-//             style={{
-//               objectFit: "cover",
-//             }}
-//           />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const BlogContent = async ({ params }: { params: { id: string } }) => {
-
-//   const currentBlogsHTML = await getBlogContent(params.id);
-
-//   if (!currentBlogsHTML) {
-//     return redirect("/404");
-//   }
-
-//   return <>
-//   {parse(currentBlogsHTML)}
-//   </>
-// }
-
-// export default async function Blogpage({ params }: { params: { id: string } }) {
-
-//   return (
-//     <main className="flex flex-col">
-//       <div className="flex justify-center">
-//         <div className="flex max-w-[1220px] flex-col items-center justify-center">
-//           <div className="flex-col gap-10 p-10 md:flex lg:grid lg:grid-cols-7">
-//               <div className="w-full col-span-5">
-//             <Suspense fallback={<BlogContentSkeleton/>}>
-//                 <BlogContent params={params} />
-//             </Suspense>
-//             </div>
-//             <div className="col-span-2">
-//             <Suspense fallback={<BlogSidebarSkeleton/>}>
-//                 <BlogSidebar id={params.id}/>
-//             </Suspense>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
-
-import React from "react";
+import Link from "next/link";
 import { Metadata } from "next";
+
+const copy: Record<
+  string,
+  { title: string; body: string[] }
+> = {
+  "1": {
+    title: "Pse aktiviteti fizik rregullisht ndikon në energjinë tuaj",
+    body: [
+      "Stërvitja e rregullt ndihmon trupin të përdorë më mirë oksigjenin dhe të ruajë masën muskulore, që shpesh përkthehet në më shumë energji gjatë ditës.",
+      "Nuk ju duhet një program ekstrem: edhe shëtitje, not i lehtë ose 2–3 seanca në javë në një qendër partner mund të japin ndryshim të dukshëm në gjendjen shpirtërore dhe në gjumin.",
+      "Multi Active Card ju jep fleksibilitet për të provuar ambiente të ndryshme dhe për të gjetur atë që ju përshtatet — kjo e bën më të lehtë që zakonin të qëndrojë.",
+    ],
+  },
+  "2": {
+    title: "Wellness në punë: ku të filloni pa komplikime",
+    body: [
+      "Filloni me diçka të matshme: një aktivitet grupor në muaj, ose një përfitim që punonjësit e përdorin menjëherë (p.sh. qasje në palestra dhe spa partnerë).",
+      "Komunikoni qartë: përshkruani çfarë ofroni dhe si mund ta aktivizojnë — sa më pak friction, aq më shumë përdorim.",
+      "Vlerësoni pas disa muajsh: pyetje të shkurtra ose përdorim i përfitimeve ju tregon nëse duhet të shtoni varietet ose orare.",
+    ],
+  },
+  "3": {
+    title: "Si të zgjidhni qendrën e duhur fitness për stilin tuaj",
+    body: [
+      "Shikoni oraret dhe distancën nga shtëpia ose puna — një vend “i mirë” që nuk e përdorni kurrë nuk vlen sa një më pak perfekt por i përdorshëm.",
+      "Vlerësoni shërbimet: a ju duhet vetëm palestër, apo edhe grup, spa, ose trajner? Kartat që mbulojnë rrjet të gjerë ju lejojnë të eksperimentoni.",
+      "Provoni disa vizita përpara se të vendosni: shumë vende partner ofrojnë përvoja të ndryshme; gjeni atë ku ndiheni të mirëpritur.",
+    ],
+  },
+};
 
 export async function generateMetadata({
   params,
@@ -89,47 +37,63 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
+  const article = copy[id];
 
-  // For now, return basic metadata since blog content is not implemented
   return {
-    title: `Blog - ${id}`,
+    title: article?.title ?? `Blog ${id}`,
     description:
-      "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme. Këshilla ekspertësh dhe udhëzime të dobishme.",
-    keywords: [
-      "blog",
-      "artikull",
-      "fitness",
-      "wellness",
-      "shëndet",
-      "Multi Active Card",
-      "këshilla",
-      "udhëzime",
-    ],
+      article?.body[0] ??
+      "Artikuj për fitness, wellness dhe jetësë të shëndetshme me Multi Active Card.",
     openGraph: {
-      title: `Blog - Multi Active Card`,
+      title: article?.title ?? "Blog - Multi Active Card",
       description:
-        "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme.",
+        article?.body[0] ??
+        "Artikuj për fitness dhe wellness në Shqipëri.",
       url: `https://multiactivecard.com/blogs/${id}`,
-      images: [
-        {
-          url: "/images/blog-default-og.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Multi Active Card Blog",
-        },
-      ],
-    },
-    twitter: {
-      title: `Blog - Multi Active Card`,
-      description:
-        "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme.",
-      images: ["/images/blog-default-twitter.jpg"],
     },
   };
 }
 
-function Page() {
-  return <div>Blog By Id</div>;
-}
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const article = copy[id];
 
-export default Page;
+  if (!article) {
+    return (
+      <main className="mx-auto max-w-2xl px-4 py-16 text-center">
+        <p className="text-muted-foreground">Artikulli nuk u gjet.</p>
+        <Link
+          href="/blogs"
+          className="mt-6 inline-block text-primary underline-offset-4 hover:underline"
+        >
+          Kthehu te blogu
+        </Link>
+      </main>
+    );
+  }
+
+  return (
+    <main className="mx-auto max-w-2xl px-4 py-10 sm:py-14">
+      <Link
+        href="/blogs"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      >
+        ← Blogu
+      </Link>
+      <article className="mt-8">
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          {article.title}
+        </h1>
+        <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
+          {article.body.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      </article>
+    </main>
+  );
+}

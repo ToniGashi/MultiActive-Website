@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: "https://multiactivecard.com/about",
     images: [
       {
-        url: "/images/about-og.jpg",
+        url: "/images/social-share.png",
         width: 1200,
         height: 630,
         alt: "Rreth Multi Active Card",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Rreth Nesh - Multi Active Card",
     description:
       "Mësoni më shumë rreth Multi Active Card dhe misionit tonë për të promovuar një jetësë të shëndetshme në Shqipëri.",
-    images: ["/images/about-twitter.jpg"],
+    images: ["/images/social-share.png"],
   },
 };
 
@@ -46,8 +46,8 @@ export default function Page() {
       <div className="relative -mt-24 flex h-[588px]">
         <div className="absolute flex h-[588px] w-full">
           <Image
-            alt="Coolvacay about us hero image"
-            src="/about_us.jpg"
+            alt="Multi Active Card — rreth nesh"
+            src="/brand/training-deadlift.png"
             fill
             priority={true}
             style={{

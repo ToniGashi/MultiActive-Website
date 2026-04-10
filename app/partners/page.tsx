@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     url: "https://multiactivecard.com/partners",
     images: [
       {
-        url: "/images/partners-og.jpg",
+        url: "/images/social-share.png",
         width: 1200,
         height: 630,
         alt: "Partnerët e Multi Active Card",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Partnerët Tanë - Multi Active Card",
     description:
       "Zbuloni rrjetin tonë të gjerë të partnerëve të fitness dhe wellness në gjithë Shqipërinë.",
-    images: ["/images/partners-twitter.jpg"],
+    images: ["/images/social-share.png"],
   },
 };
 

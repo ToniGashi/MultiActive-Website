@@ -1,7 +1,169 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
-
-/* Additional styles */
 @import "additional-styles/utility-patterns.css";
 @import "additional-styles/theme.css";
 @import "tailwindcss/utilities";
+
+:root {
+  --background: #050506;
+  --foreground: #fafafa;
+  --card: #0c0c0e;
+  --card-foreground: #fafafa;
+  --popover: #0c0c0e;
+  --popover-foreground: #fafafa;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #18181b;
+  --secondary-foreground: #e4e4e7;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --accent: rgba(59, 130, 246, 0.14);
+  --accent-foreground: #bfdbfe;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.09);
+  --input: #27272a;
+  --ring: #3b82f6;
+  --radius: 0.5rem;
+  --chart-1: #60a5fa;
+  --chart-2: #3b82f6;
+  --chart-3: #2563eb;
+  --chart-4: #1d4ed8;
+  --chart-5: #1e40af;
+  --sidebar: #0a0a0b;
+  --font-mono: JetBrains Mono, monospace;
+  --font-sans: Inter, sans-serif;
+  --font-serif: Source Serif 4, serif;
+  --sidebar-ring: #3b82f6;
+  --sidebar-accent: rgba(59, 130, 246, 0.15);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-primary: #3b82f6;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent-foreground: #bfdbfe;
+}
+
+.dark {
+  --background: #050506;
+  --foreground: #fafafa;
+  --card: #0c0c0e;
+  --card-foreground: #fafafa;
+  --popover: #0c0c0e;
+  --popover-foreground: #fafafa;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #18181b;
+  --secondary-foreground: #e4e4e7;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --accent: rgba(59, 130, 246, 0.14);
+  --accent-foreground: #bfdbfe;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.09);
+  --input: #27272a;
+  --ring: #3b82f6;
+  --radius: 0.5rem;
+  --chart-1: #60a5fa;
+  --chart-2: #3b82f6;
+  --chart-3: #2563eb;
+  --chart-4: #1d4ed8;
+  --chart-5: #1e40af;
+  --sidebar: #0a0a0b;
+  --sidebar-ring: #3b82f6;
+  --sidebar-accent: rgba(59, 130, 246, 0.15);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-primary: #3b82f6;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent-foreground: #bfdbfe;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -40%, rgba(59, 130, 246, 0.16), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 20%, rgba(14, 165, 233, 0.08), transparent 50%),
+      radial-gradient(ellipse 45% 35% at 0% 60%, rgba(59, 130, 246, 0.06), transparent 45%);
+    background-attachment: fixed;
+  }
+}
+
+@theme inline {
+  --color-card: var(--card);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-radius: var(--radius);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-popover: var(--popover);
+  --color-primary: var(--primary);
+  --color-sidebar: var(--sidebar);
+  --color-font-mono: var(--font-mono);
+  --color-font-sans: var(--font-sans);
+  --color-secondary: var(--secondary);
+  --color-background: var(--background);
+  --color-font-serif: var(--font-serif);
+  --color-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-card-foreground: var(--card-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+}
+
+/* Google Maps InfoWindow: strip default white card so partner popups match site theme */
+.gm-style .gm-style-iw-c {
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0.75rem !important;
+  box-shadow: none !important;
+  max-width: none !important;
+}
+
+.gm-style .gm-style-iw-d {
+  /* visible: avoid clipping the close control at the top of the map frame */
+  overflow: visible !important;
+  background: transparent !important;
+}
+
+.gm-style .gm-style-iw-chr {
+  z-index: 2 !important;
+}
+
+/* Pointer / tail under the popup (several DOM shapes across Maps versions) */
+.gm-style .gm-style-iw-t::after,
+.gm-style .gm-style-iw-tc .gm-style-iw-t::after {
+  background: #0c0c0e !important;
+  box-shadow: -2px -2px 0 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Close control: dark pill instead of default light chrome */
+.gm-style .gm-ui-hover-effect {
+  background: rgba(24, 24, 27, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.45) !important;
+}
+
+.gm-style .gm-ui-hover-effect > span {
+  background-color: #e4e4e7 !important;
+}

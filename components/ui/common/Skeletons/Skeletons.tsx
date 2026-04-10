@@ -3,14 +3,14 @@ import { Fragment } from "react";
 export function CardSkeleton() {
   return (
     <div
-      className={`flex h-full grow-0 animate-pulse flex-col overflow-hidden rounded-xl bg-gray-100 p-1 shadow-sm max-[1280px]:w-[260px] max-[1150px]:w-[240px] max-[1070px]:w-[280px] xl:w-[280px]`}
+      className={`flex h-full grow-0 animate-pulse flex-col overflow-hidden rounded-xl border border-white/10 bg-card p-1 shadow-sm max-[1280px]:w-[260px] max-[1150px]:w-[240px] max-[1070px]:w-[280px] xl:w-[280px]`}
     >
-      <div className="flex h-[210px] items-center justify-center truncate rounded-xl bg-white px-16 py-8" />
+      <div className="flex h-[210px] items-center justify-center truncate rounded-xl bg-muted px-16 py-8" />
       <div className="flex flex-col">
-        <div className="mx-2 my-4 flex h-14 grow rounded-md bg-gray-200" />
+        <div className="mx-2 my-4 flex h-14 grow rounded-md bg-white/10" />
         <div className="flex gap-4">
-          <div className="m-2 h-4 w-32 rounded-md bg-gray-200 text-sm font-medium" />
-          <div className="m-2 h-4 w-32 rounded-md bg-gray-200 text-sm font-medium" />
+          <div className="m-2 h-4 w-32 rounded-md bg-white/10 text-sm font-medium" />
+          <div className="m-2 h-4 w-32 rounded-md bg-white/10 text-sm font-medium" />
         </div>
       </div>
     </div>
@@ -333,19 +333,19 @@ export function AllBlogsSkeleton() {
       {/* Featured Blog Skeleton */}
       <div className="flex flex-col items-center gap-6 md:flex-row md:gap-20">
         <div className="flex max-w-full flex-col gap-5 md:max-w-[50%]">
-          <div className="h-6 w-[80px] rounded bg-gray-100" />{" "}
+          <div className="h-6 w-[80px] rounded bg-muted" />{" "}
           {/* CustomChip Skeleton */}
           <div className="flex flex-col gap-3">
-            <div className="h-10 w-[200px] rounded bg-gray-100 md:h-[67px] md:w-[300px]" />{" "}
+            <div className="h-10 w-[200px] rounded bg-muted md:h-[67px] md:w-[300px]" />{" "}
             {/* Title Skeleton */}
-            <div className="h-4 w-full rounded bg-gray-100 md:h-[30px]" />{" "}
+            <div className="h-4 w-full rounded bg-muted md:h-[30px]" />{" "}
             {/* Description Skeleton */}
-            <div className="h-4 w-[160px] rounded bg-gray-100" />{" "}
+            <div className="h-4 w-[160px] rounded bg-muted" />{" "}
             {/* Button Skeleton */}
           </div>
         </div>
         <div className="flex w-full md:w-auto">
-          <div className="hidden h-[370px] w-[530px] rounded-2xl bg-gray-100 md:inline-block" />{" "}
+          <div className="hidden h-[370px] w-[530px] rounded-2xl bg-muted md:inline-block" />{" "}
           {/* Image Skeleton */}
         </div>
       </div>
@@ -355,13 +355,13 @@ export function AllBlogsSkeleton() {
         {Array.from({ length: 8 }).map((_, index) => (
           <div
             key={index}
-            className="flex flex-col gap-3 rounded-lg border border-[#EAEAEF] p-4"
+            className="flex flex-col gap-3 rounded-lg border border-white/10 bg-card/50 p-4"
           >
-            <div className="h-[200px] w-full rounded bg-gray-100" />{" "}
+            <div className="h-[200px] w-full rounded bg-muted" />{" "}
             {/* Image Skeleton */}
-            <div className="h-6 w-[70%] rounded bg-gray-100" />{" "}
+            <div className="h-6 w-[70%] rounded bg-muted" />{" "}
             {/* Title Skeleton */}
-            <div className="h-4 w-[50%] rounded bg-gray-100" />{" "}
+            <div className="h-4 w-[50%] rounded bg-muted" />{" "}
             {/* Subtitle Skeleton */}
           </div>
         ))}

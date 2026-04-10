@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     url: "https://multiactivecard.com/blogs",
     images: [
       {
-        url: "/images/blog-og.jpg",
+        url: "/images/social-share.png",
         width: 1200,
         height: 630,
         alt: "Multi Active Card Blog",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Blog - Multi Active Card",
     description:
       "Lexoni artikujt tanë të fundit për fitness, wellness dhe jetësë të shëndetshme.",
-    images: ["/images/blog-twitter.jpg"],
+    images: ["/images/social-share.png"],
   },
 };
 

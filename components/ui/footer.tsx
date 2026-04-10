@@ -4,11 +4,11 @@ import FooterIllustration from "@/public/images/footer-illustration.svg";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="relative z-10 border-t border-white/10 bg-[#08080a]/90 pb-24 backdrop-blur-md supports-[backdrop-filter]:bg-[#08080a]/75 sm:pb-28">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         {/* Footer illustration */}
         <div
-          className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -translate-x-1/2"
+          className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 opacity-20"
           aria-hidden="true"
         >
           <Image
@@ -19,25 +19,25 @@ export default function Footer() {
             alt="Footer illustration"
           />
         </div>
-        <div className="grid grid-cols-2 justify-between gap-12 py-8 sm:grid-rows-[auto_auto] md:grid-cols-2 md:grid-rows-[auto_auto] md:py-12 lg:grid-cols-[repeat(2,minmax(0,140px))_1fr] lg:grid-rows-1 xl:gap-20">
+        <div className="grid grid-cols-2 justify-between gap-12 py-8 sm:grid-rows-[auto_auto] md:grid-cols-2 md:grid-rows-[auto_auto] md:py-12 lg:grid-cols-[repeat(2,minmax(0,160px))_1fr] lg:grid-rows-1 xl:gap-20">
           {/* 2nd block */}
           <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-200">Company</h3>
+            <h3 className="text-sm font-semibold text-foreground">Kompania</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-muted-foreground transition hover:text-primary"
                   href="/about"
                 >
-                  About us
+                  Rreth nesh
                 </a>
               </li>
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-muted-foreground transition hover:text-primary"
                   href="/contact"
                 >
-                  Contact us
+                  Na kontaktoni
                 </a>
               </li>
               {/* <li>
@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
           {/* 3rd block */}
           <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-200">Resources</h3>
+            <h3 className="text-sm font-semibold text-foreground">Burime</h3>
             <ul className="space-y-2 text-sm">
               {/* <li>
                 <a
@@ -80,10 +80,10 @@ export default function Footer() {
               </li> */}
               <li>
                 <a
-                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  className="text-muted-foreground transition hover:text-primary"
                   href="/terms"
                 >
-                  Terms of service
+                  Kushtet e sherbimit
                 </a>
               </li>
               {/* <li>
@@ -102,10 +102,11 @@ export default function Footer() {
               <Logo />
             </div>
             <div className="text-sm">
-              <p className="mb-3 text-indigo-200/65">
-                © MultiActive
-                <span className="text-gray-700"> · </span>
-                Albania
+              <p className="mb-1 text-muted-foreground">
+                © {new Date().getFullYear()} Multi Active Card
+              </p>
+              <p className="text-muted-foreground">
+                Platforma juaj per fitness dhe wellness korporativ ne Shqiperi.
               </p>
               {/* <ul className="inline-flex gap-1">
                 <li>

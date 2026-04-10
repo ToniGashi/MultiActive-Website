@@ -13,6 +13,8 @@ export type IPartner = {
   thumbnailImage: string; // Thumbnail image URL
   longitude: number; // Longitude coordinate
   latitude: number; // Latitude coordinate
+  phone?: string;
+  website?: string;
   createdAt: Date; // Timestamp of creation
   updatedAt: Date; // Timestamp of last update
 };
