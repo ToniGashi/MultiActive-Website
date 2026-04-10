@@ -1,5 +1,6 @@
 import Logo from "./logo";
 import Image from "next/image";
+import Link from "next/link";
 import FooterIllustration from "@/public/images/footer-illustration.svg";
 
 export default function Footer() {
@@ -25,20 +26,22 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-foreground">Kompania</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a
+                <Link
                   className="text-muted-foreground transition hover:text-primary"
                   href="/about"
+                  prefetch
                 >
                   Rreth nesh
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="text-muted-foreground transition hover:text-primary"
                   href="/contact"
+                  prefetch
                 >
                   Na kontaktoni
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
@@ -79,12 +82,13 @@ export default function Footer() {
                 </a>
               </li> */}
               <li>
-                <a
+                <Link
                   className="text-muted-foreground transition hover:text-primary"
                   href="/terms"
+                  prefetch
                 >
                   Kushtet e sherbimit
-                </a>
+                </Link>
               </li>
               {/* <li>
                 <a
